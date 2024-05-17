@@ -1,0 +1,22 @@
+<%= form_with(model: student, local: true) do |form| %>
+  <%= render partial: 'shared/errors', locals: { model: student } %>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

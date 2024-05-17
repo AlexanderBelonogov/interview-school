@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_103807) do
+ActiveRecord::Schema.define(version: 2024_05_17_092538) do
+
+  create_table "classrooms", force: :cascade do |t|
+    t.integer "number", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["number"], name: "index_classrooms_on_number", unique: true
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "username", null: false
+    t.text "first_name", null: false
+    t.text "last_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["username"], name: "index_students_on_username", unique: true
+  end
 
   create_table "subjects", force: :cascade do |t|
     t.string "name", null: false

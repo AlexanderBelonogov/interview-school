@@ -1,0 +1,12 @@
+<%= form_with(model: classroom, local: true) do |form| %>
+  <%= render partial: 'shared/errors', locals: { model: classroom } %>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

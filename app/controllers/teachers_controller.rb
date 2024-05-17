@@ -1,4 +1,5 @@
 class TeachersController < ApplicationController
+  include Responder
   before_action :set_teacher, only: %i[show edit update destroy]
 
   # GET /teachers
@@ -23,40 +24,20 @@ class TeachersController < ApplicationController
   # POST /teachers.json
   def create
     @teacher = Teacher.new(teacher_params)
-
-    respond_to do |format|
-      if @teacher.save
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
-        format.json { render :show, status: :created, location: @teacher }
-      else
-        format.html { render :new }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_on_create(@teacher)
   end
 
   # PATCH/PUT /teachers/1
   # PATCH/PUT /teachers/1.json
   def update
-    respond_to do |format|
-      if @teacher.update(teacher_params)
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
-        format.json { render :show, status: :ok, location: @teacher }
-      else
-        format.html { render :edit }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_on_update(@teacher, teacher_params)
   end
 
   # DELETE /teachers/1
   # DELETE /teachers/1.json
   def destroy
     @teacher.destroy
-    respond_to do |format|
-      format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_on_destroy(teachers_url)
   end
 
   private

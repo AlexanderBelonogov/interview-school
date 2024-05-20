@@ -10,13 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_17_092538) do
+ActiveRecord::Schema.define(version: 2024_05_17_132004) do
 
   create_table "classrooms", force: :cascade do |t|
     t.integer "number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["number"], name: "index_classrooms_on_number", unique: true
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.integer "teacher_subject_id", null: false
+    t.integer "classroom_id", null: false
+    t.integer "start_at", null: false
+    t.integer "end_at", null: false
+    t.string "week_days", null: false
+    t.integer "duration", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["classroom_id"], name: "index_sections_on_classroom_id"
+    t.index ["teacher_subject_id"], name: "index_sections_on_teacher_subject_id"
+  end
+
+  create_table "student_sections", force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.integer "student_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id", "student_id"], name: "index_student_sections_on_section_id_and_student_id", unique: true
+    t.index ["section_id"], name: "index_student_sections_on_section_id"
+    t.index ["student_id"], name: "index_student_sections_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -53,6 +76,10 @@ ActiveRecord::Schema.define(version: 2024_05_17_092538) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "sections", "classrooms"
+  add_foreign_key "sections", "teacher_subjects"
+  add_foreign_key "student_sections", "sections"
+  add_foreign_key "student_sections", "students"
   add_foreign_key "teacher_subjects", "subjects"
   add_foreign_key "teacher_subjects", "teachers"
 end

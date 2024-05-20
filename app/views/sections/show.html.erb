@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @section.teacher_subject.subject_name %>
+</p>
+<p>
+  <strong>Teacher:</strong>
+  <%= @section.teacher_subject.first_and_last_name %>
+</p>
+<p>
+  <strong>Classroom:</strong>
+  <%= @section.classroom_number %>
+</p>
+<p>
+   <strong>Duration:</strong>
+  <%= @section.start_at_to_am_pm %> - <%= @section.end_at_to_am_pm %>
+</p>
+
+<%= link_to 'Back', sections_path %>
+
+<p>
+  <strong>Students (<%= @section.student_sections.count %>)</strong>
+  <ul>
+    <% @section.student_sections.each do |student_section| %>
+      <%= render 'student_sections/show', student_section: student_section %>
+    <% end %>
+  </ul>
+  <%= render 'student_sections/new' %>
+</p>

@@ -1,0 +1,33 @@
+<%= form_with(model: section, local: true) do |form| %>
+  <%= render partial: 'shared/errors', locals: { model: section } %>
+
+  <div class="field">
+    <%= form.label :teacher_subject %>
+    <%= form.select :teacher_subject_id, options_from_collection_for_select(TeacherSubject.includes(:teacher, :subject).all, :id, :display_name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :classroom %>
+    <%= form.select :classroom_id, options_from_collection_for_select(Classroom.all, :id, :number) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_at %>
+    <%= form.select :start_at, options_for_select(start_end_time_for_select) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.select :duration, options_for_select(Section::DURATION.to_a) %>
+    minutes
+  </div>
+
+  <div class="field">
+    <%= form.label :week_days %>
+    <%= form.select :week_days, options_for_select(Section::DAYS.invert.to_a) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

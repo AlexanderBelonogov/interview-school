@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   include Responder
 
-  before_action :set_student, only: %i[show edit update destroy]
+  before_action :set_student, only: %i[show edit update destroy download]
 
   # GET /students
   # GET /students.json
@@ -39,6 +39,11 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     respond_on_destroy(students_url)
+  end
+
+  def download
+    pdf = PdfService.new(@student)
+    send_file(pdf.create, filename: "#{@student.display_name}.pdf", type: 'application/pdf', disposition: 'inline')
   end
 
   private

@@ -1,16 +1,6 @@
 <div id='new-teacher-subject'>
   <%= form_with model: @teacher_subject, url: teacher_teacher_subjects_path(@teacher), create_remote: true do |form| %>
-    <% if @teacher_subject.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@teacher_subject.errors.count, "error") %> prohibited this teacher from being saved:</h2>
-
-        <ul>
-          <% @teacher_subject.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: 'shared/errors', locals: { model: @teacher_subject } %>
 
     <div class="field">
       <%= form.label :subject %>

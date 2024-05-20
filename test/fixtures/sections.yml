@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+section_one:
+  teacher_subject: math_teacher_math
+  classroom: one
+  start_at: <%= Section::TIME[:start_time] %>
+  end_at: <%= Section::TIME[:start_time] + Section::DURATION[50] %>
+  week_days: <%= Section::DAYS[:all] %>
+  duration: <%= Section::DURATION[50] %>
+
+section_two:
+  teacher_subject: math_and_english_teacher_math
+  classroom: two
+  start_at: <%= Section::TIME[:start_time] %>
+  end_at: <%= Section::TIME[:start_time] + Section::DURATION[80] %>
+  week_days: <%= Section::DAYS[:tth] %>
+  duration: <%= Section::DURATION[80] %>

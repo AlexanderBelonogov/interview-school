@@ -1,0 +1,8 @@
+<%#
+    student_section
+%>
+<li id='student-section-<%= student_section.id %>'>
+  <%= link_to student_section.display_name, student_path(student_section.student) %>
+  |
+  <%= link_to 'Remove', student_section_path(student_section), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+</li>

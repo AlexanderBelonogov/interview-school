@@ -15,5 +15,9 @@
   <%= @student.last_name %>
 </p>
 
+<% if @student.sections.first %>
+  <%= link_to 'Download', students_download_path(@student.id), data: { turbolinks: false } %>
+<% end %>
+
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

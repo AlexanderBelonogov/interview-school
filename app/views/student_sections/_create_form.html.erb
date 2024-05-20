@@ -1,0 +1,14 @@
+<div id='new-student-section'>
+  <%= form_with model: @student_section, url: section_student_sections_path(@section), create_remote: true do |form| %>
+    <%= render partial: 'shared/errors', locals: { model: @student_section } %>
+
+    <div class="field">
+      <%= form.label :student %>
+      <%= form.select :student_id, options_from_collection_for_select(Student.where.not(id: @section.students), :id, :display_name) %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Add' %>
+    </div>
+  <% end %>
+</div>
